@@ -80,7 +80,7 @@ const portfolioData = {
   ],
   contact: {
     email: "saptakmondal.official@gmail.com",
-    linkedin: "https://linkedin.com/in/saptak-mondal-33ab90253",
+    linkedin: "https://www.linkedin.com/in/saptak-mondal-448b8b40b",
     github: "https://github.com/saptak69",
     instagram: "https://www.instagram.com/saptak_._/",
   },
