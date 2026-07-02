@@ -3,11 +3,10 @@
 import { useEffect, useState, useTransition } from "react"
 import { createContactMessage } from "@/lib/actions"
 import { Toaster, toast } from "sonner"
-import { Mail, Github, Linkedin, ExternalLink, Menu, X, Server, Database, Monitor, Play, Pause, SkipForward, SkipBack, Volume2, Instagram, Music, Disc, Terminal, Code, Cpu } from "lucide-react"
+import { Github, Linkedin, ExternalLink, Menu, X, Database, Monitor, Play, Pause, SkipForward, SkipBack, Instagram, Music, Disc, Terminal, Code, Cpu } from "lucide-react"
 
 const portfolioData = {
   name: "Saptak Mondal",
-  tagline: "Full Stack Developer",
   about:
     "As a Computer Science Engineering graduate, I am deeply passionate about software engineering and building high-fidelity, production-grade applications from the ground up. I thrive on solving complex engineering problems and crafting beautiful, highly intuitive user interfaces that balance aesthetics with robust backend performance. With a strong interest in startup culture, I value rapid learning, direct ownership, and continuous iteration. I am committed to writing clean, maintainable code and developing scalable architectures that deliver meaningful user experiences.",
   skills: [
@@ -83,7 +82,7 @@ const portfolioData = {
     email: "saptakmondal.official@gmail.com",
     linkedin: "https://linkedin.com/in/saptak-mondal-33ab90253",
     github: "https://github.com/saptak69",
-    twitter: "#",
+    instagram: "https://www.instagram.com/saptak_._/",
   },
 }
 
@@ -438,12 +437,12 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
       <div className="min-h-screen bg-black text-white relative font-sans overflow-hidden">
         {/* Subtle premium background glow & mesh */}
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-          {/* Ambient grid mesh */}
-          <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:50px_50px]" />
-          {/* Silver/grey soft radial glows */}
-          <div className="absolute -top-[40%] -left-[20%] w-[80%] h-[80%] rounded-full bg-zinc-800/8 blur-[150px] mix-blend-screen" />
-          <div className="absolute top-[30%] -right-[30%] w-[90%] h-[90%] rounded-full bg-zinc-900/12 blur-[180px] mix-blend-screen" />
-          <div className="absolute -bottom-[20%] left-[10%] w-[60%] h-[60%] rounded-full bg-zinc-800/6 blur-[120px] mix-blend-screen" />
+          {/* Ambient grid mesh with radial gradient mask */}
+          <div className="absolute inset-0 opacity-[0.035] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:60px_60px]" style={{ maskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 70%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 70%, transparent 100%)' }} />
+          {/* Premium glows: Violet/indigo cyber-space color accents & silver highlights */}
+          <div className="absolute -top-[30%] -left-[10%] w-[70%] h-[70%] rounded-full bg-violet-600/12 blur-[140px] mix-blend-screen animate-pulse" style={{ animationDuration: '10s' }} />
+          <div className="absolute top-[20%] -right-[20%] w-[80%] h-[80%] rounded-full bg-indigo-500/12 blur-[160px] mix-blend-screen animate-pulse" style={{ animationDuration: '14s' }} />
+          <div className="absolute -bottom-[10%] left-[15%] w-[50%] h-[50%] rounded-full bg-zinc-700/8 blur-[120px] mix-blend-screen" />
         </div>
         
         {/* Header */}
@@ -467,12 +466,6 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
               /PROJECTS
             </a>
             <a 
-              href="#music" 
-              className="transition-colors text-zinc-300 hover:text-white"
-            >
-              /MUSIC
-            </a>
-            <a 
               href="#education" 
               className="transition-colors text-zinc-300 hover:text-white"
             >
@@ -483,6 +476,12 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
               className="transition-colors text-zinc-300 hover:text-white"
             >
               /CONTACT
+            </a>
+            <a 
+              href="#music" 
+              className="transition-colors text-zinc-300 hover:text-white"
+            >
+              /MUSIC
             </a>
           </nav>
 
@@ -511,9 +510,9 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
             <nav className="flex flex-col space-y-8 font-mono text-sm tracking-[0.25em]">
               <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-zinc-400 hover:text-white">/ ABOUT</a>
               <a href="#projects" onClick={() => setMobileMenuOpen(false)} className="text-zinc-400 hover:text-white">/ PROJECTS</a>
-              <a href="#music" onClick={() => setMobileMenuOpen(false)} className="text-zinc-400 hover:text-white">/ MUSIC</a>
               <a href="#education" onClick={() => setMobileMenuOpen(false)} className="text-zinc-400 hover:text-white">/ ACADEMICS</a>
               <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="text-zinc-400 hover:text-white">/ CONTACT</a>
+              <a href="#music" onClick={() => setMobileMenuOpen(false)} className="text-zinc-400 hover:text-white">/ MUSIC</a>
               <a href="/admin" onClick={() => setMobileMenuOpen(false)} className="text-zinc-500 hover:text-white">/ SYS_ADMIN</a>
             </nav>
           </div>
@@ -522,67 +521,40 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
         <main className="max-w-5xl mx-auto px-6 pt-28 md:pt-36 pb-20 relative z-10 space-y-20 md:space-y-32">
           
           {/* HERO SECTION */}
-          <section id="hero" className="min-h-[75vh] flex flex-col justify-center py-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-7 space-y-8">
-                {/* Live System Indicator */}
-                <div className="inline-flex items-center space-x-2 bg-zinc-950/40 border border-white/5 rounded-full px-3.5 py-1.5 font-mono text-xs tracking-wider text-zinc-400">
-                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-pulse" />
-                  <span className="uppercase text-[10px] sm:text-xs">PORTFOLIO NODE // ACTIVE</span>
-                </div>
+          <section id="hero" className="min-h-[70vh] sm:min-h-[75vh] flex flex-col justify-center py-4 sm:py-6">
+            <div className="space-y-6 sm:space-y-10">
+              
+              {/* Upper row: Name/desc and picture side-by-side on ALL screens */}
+              <div className="flex flex-row items-start justify-between gap-4 sm:gap-8 lg:gap-12">
                 
-                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-extralight tracking-tight leading-none metallic-text select-none">
-                  {currentPortfolioData.name}
-                </h1>
-                
-                <div className="space-y-2 border-l-2 border-zinc-800 pl-4">
-                  <div className="h-8 overflow-hidden flex items-center">
-                    <span className="text-sm sm:text-base md:text-lg font-semibold tracking-wider text-white uppercase transition-all duration-500 block">
-                      {titles[activeTitleIndex]}
-                    </span>
+                {/* Left block: Text info */}
+                <div className="flex-1 min-w-0 space-y-4 sm:space-y-6">
+                  {/* Live System Indicator */}
+                  <div className="inline-flex items-center space-x-2 bg-zinc-950/45 border border-white/10 rounded-full px-2.5 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[9px] sm:text-xs tracking-wider text-zinc-400">
+                    <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 animate-pulse" />
+                    <span className="uppercase text-[9px] sm:text-xs">PORTFOLIO NODE // ACTIVE</span>
                   </div>
-                  <p className="text-base sm:text-lg font-mono text-zinc-300 max-w-xl leading-relaxed font-light">
-                    GNIT Graduate engineering modular systems, high-fidelity interfaces, and progressive music covers.
-                  </p>
-                </div>
-                
-                {/* Dashboard stats style metadata */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl font-mono text-xs text-zinc-400">
-                  <div className="border border-white/5 bg-zinc-950/20 p-5 rounded-xl">
-                    <p className="text-zinc-500 font-semibold uppercase tracking-wider mb-1">/LOCATION</p>
-                    <p className="text-zinc-200 font-medium text-sm">KOLKATA, IN</p>
-                  </div>
-                  <div className="border border-white/5 bg-zinc-950/20 p-5 rounded-xl">
-                    <p className="text-zinc-500 font-semibold uppercase tracking-wider mb-1">/AVAILABILITY</p>
-                    <p className="text-zinc-200 font-medium text-sm">OPEN_TO_WORK</p>
-                  </div>
-                  <div className="border border-white/5 bg-zinc-950/20 p-5 rounded-xl">
-                    <p className="text-zinc-500 font-semibold uppercase tracking-wider mb-1">/SPECIALTIES</p>
-                    <p className="text-zinc-200 font-medium text-sm">FULL STACK & PRODUCT</p>
+                  
+                  <h1 className="text-3xl min-[360px]:text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extralight tracking-tight leading-none metallic-text select-none">
+                    {currentPortfolioData.name}
+                  </h1>
+                  
+                  <div className="space-y-1.5 sm:space-y-3 border-l-2 border-zinc-800 pl-3 sm:pl-4">
+                    <div className="h-6 sm:h-8 overflow-hidden flex items-center">
+                      <span className="text-xs sm:text-base md:text-lg font-semibold tracking-wider text-white uppercase transition-all duration-500 block">
+                        {titles[activeTitleIndex]}
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm md:text-base font-mono text-zinc-300 max-w-xl leading-relaxed font-light">
+                      GNIT Graduate engineering modular systems, high-fidelity interfaces, and progressive music covers.
+                    </p>
                   </div>
                 </div>
 
-                <div className="pt-4 flex flex-wrap gap-4 font-mono text-xs sm:text-sm tracking-wider">
-                  <a 
-                    href="#contact" 
-                    className="bg-white text-black font-bold uppercase py-4 px-8 rounded-full border border-white hover:bg-black hover:text-white transition-all duration-300"
-                  >
-                    CONNECT
-                  </a>
-                  <a 
-                    href="#projects" 
-                    className="border border-white/20 hover:border-white/40 text-zinc-200 hover:text-white uppercase py-4 px-8 rounded-full transition-all duration-300 bg-zinc-950/10"
-                  >
-                    SCAN PROJECTS
-                  </a>
-                </div>
-              </div>
-
-              {/* Photo Box - Monochromatic silver luxury designer frame */}
-              <div className="lg:col-span-5 flex justify-center lg:justify-end">
-                <div className="w-full max-w-sm space-y-4 font-mono">
-                  {/* Photo Title tag */}
-                  <div className="flex justify-between items-center text-[9px] text-zinc-500 px-1 tracking-widest">
+                {/* Right block: Profile Picture (Side-by-side on all screens) */}
+                <div className="w-[95px] min-[380px]:w-28 min-[440px]:w-32 sm:w-48 md:w-64 lg:w-80 xl:w-96 flex-shrink-0 font-mono">
+                  {/* Photo Title tag (hidden on mobile to save space) */}
+                  <div className="hidden sm:flex justify-between items-center text-[9px] text-zinc-500 px-1 tracking-widest mb-2">
                     <span>[ID: SAPTAK_MONOCHROME.RAW]</span>
                     <span>106 KB // GRAYSCALE_OPT</span>
                   </div>
@@ -591,17 +563,60 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
                     {/* Shadow glow effect */}
                     <div className="absolute -inset-1 bg-gradient-to-r from-zinc-800 to-zinc-500 rounded-2xl blur-lg opacity-15 group-hover:opacity-25 transition duration-700" />
                     
-                    {/* Photo container */}
-                    <div className="relative h-full w-full border border-white/10 rounded-2xl overflow-hidden bg-zinc-950/30 backdrop-blur-sm p-2">
+                    {/* Photo container with modern camera corner focus markings */}
+                    <div className="relative h-full w-full border border-white/10 rounded-xl sm:rounded-2xl overflow-hidden bg-zinc-950/30 backdrop-blur-sm p-1 sm:p-2">
+                      {/* Interactive Grayscale to Color Image */}
                       <img 
                         src="/placeholder-user.jpg" 
-                        alt="Saptak Mondal professional monochromatic portrait"
-                        className="h-full w-full object-cover rounded-xl filter grayscale contrast-[1.05] brightness-[0.9] group-hover:grayscale-0 group-hover:brightness-95 group-hover:scale-[1.01] transition-all duration-700 ease-out"
+                        alt="Saptak Mondal professional portrait"
+                        className="h-full w-full object-cover rounded-lg sm:rounded-xl filter grayscale contrast-[1.05] brightness-[0.9] group-hover:grayscale-0 group-hover:brightness-95 group-hover:scale-[1.01] transition-all duration-700 ease-out"
                       />
+                      
+                      {/* Tech Corner Markings */}
+                      <div className="absolute top-2 left-2 w-2.5 h-2.5 border-t border-l border-white/40" />
+                      <div className="absolute top-2 right-2 w-2.5 h-2.5 border-t border-r border-white/40" />
+                      <div className="absolute bottom-2 left-2 w-2.5 h-2.5 border-b border-l border-white/40" />
+                      <div className="absolute bottom-2 right-2 w-2.5 h-2.5 border-b border-r border-white/40" />
                     </div>
                   </div>
                 </div>
+
               </div>
+
+              {/* Lower row: Stats & CTA Buttons */}
+              <div className="space-y-6 pt-4 border-t border-white/5">
+                {/* Dashboard stats style metadata */}
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 max-w-2xl font-mono text-[9px] sm:text-xs text-zinc-400">
+                  <div className="border border-white/5 bg-zinc-950/20 p-2.5 sm:p-5 rounded-lg sm:rounded-xl">
+                    <p className="text-zinc-500 font-semibold uppercase tracking-wider mb-0.5 sm:mb-1">/LOCATION</p>
+                    <p className="text-zinc-200 font-medium text-[10px] sm:text-sm">KOLKATA, IN</p>
+                  </div>
+                  <div className="border border-white/5 bg-zinc-950/20 p-2.5 sm:p-5 rounded-lg sm:rounded-xl">
+                    <p className="text-zinc-500 font-semibold uppercase tracking-wider mb-0.5 sm:mb-1">/AVAILABILITY</p>
+                    <p className="text-zinc-200 font-medium text-[10px] sm:text-sm">OPEN_TO_WORK</p>
+                  </div>
+                  <div className="border border-white/5 bg-zinc-950/20 p-2.5 sm:p-5 rounded-lg sm:rounded-xl">
+                    <p className="text-zinc-500 font-semibold uppercase tracking-wider mb-0.5 sm:mb-1">/SPECIALTIES</p>
+                    <p className="text-zinc-200 font-medium text-[10px] sm:text-sm">FULL STACK & PROD</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-3 sm:gap-4 font-mono text-xs sm:text-sm tracking-wider">
+                  <a 
+                    href="#contact" 
+                    className="bg-white text-black font-bold uppercase py-3.5 px-7 sm:py-4 sm:px-8 rounded-full border border-white hover:bg-black hover:text-white transition-all duration-300"
+                  >
+                    CONNECT
+                  </a>
+                  <a 
+                    href="#projects" 
+                    className="border border-white/20 hover:border-white/40 text-zinc-200 hover:text-white uppercase py-3.5 px-7 sm:py-4 sm:px-8 rounded-full transition-all duration-300 bg-zinc-950/10"
+                  >
+                    SCAN PROJECTS
+                  </a>
+                </div>
+              </div>
+
             </div>
           </section>
 
@@ -610,9 +625,12 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
             {/* About Me Split Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
               <div className="lg:col-span-5 space-y-6">
-                <p className="text-xs font-mono tracking-[0.2em] uppercase text-zinc-500">/IDENTITY</p>
-                <h2 className="text-3xl md:text-4xl font-light tracking-tight text-white uppercase">
-                  ABOUT_ME
+                <div className="flex items-center gap-3">
+                  <span className="h-[1px] w-8 bg-gradient-to-r from-zinc-500 to-transparent" />
+                  <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-zinc-400">/ IDENTITY</p>
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-extralight tracking-tight text-white uppercase mt-2">
+                  ABOUT_ME<span className="text-zinc-600 animate-pulse font-mono">_</span>
                 </h2>
                 <div className="border border-white/5 bg-zinc-950/15 rounded-xl p-6 font-mono text-xs sm:text-sm text-zinc-400 space-y-4 backdrop-blur-sm">
                   <p className="flex justify-between"><span className="text-zinc-500 font-semibold uppercase tracking-wider">FULL_NAME:</span> <span className="text-zinc-200">Saptak Mondal</span></p>
@@ -623,7 +641,10 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
               </div>
               
               <div className="lg:col-span-7 space-y-6">
-                <p className="text-xs font-mono tracking-[0.2em] uppercase text-zinc-500">/BIOGRAPHY</p>
+                <div className="flex items-center gap-3">
+                  <span className="h-[1px] w-8 bg-gradient-to-r from-zinc-500 to-transparent" />
+                  <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-zinc-400">/ BIOGRAPHY</p>
+                </div>
                 <p className="text-zinc-300 leading-relaxed font-light text-base sm:text-lg">
                   {currentPortfolioData.about}
                 </p>
@@ -633,9 +654,12 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
             {/* Technical Capabilities Bento Grid - Symmetric Layout */}
             <div className="pt-16 border-t border-white/5 space-y-8">
               <div className="space-y-2">
-                <p className="text-xs font-mono tracking-[0.2em] uppercase text-zinc-500">/CAPABILITIES_PORT</p>
-                <h3 className="text-2xl font-light tracking-tight text-white uppercase">
-                  TECHNICAL_SKILLS
+                <div className="flex items-center gap-3">
+                  <span className="h-[1px] w-8 bg-gradient-to-r from-zinc-500 to-transparent" />
+                  <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-zinc-400">/ CAPABILITIES_PORT</p>
+                </div>
+                <h3 className="text-2xl font-extralight tracking-tight text-white uppercase mt-2">
+                  TECHNICAL_SKILLS<span className="text-zinc-650 animate-pulse font-mono">_</span>
                 </h3>
               </div>
               
@@ -675,9 +699,12 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
           <section id="projects" className="border-t border-white/10 pt-16 space-y-12">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
               <div className="space-y-2">
-                <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-zinc-500">/SELECTED CREATIONS</p>
-                <h2 className="text-3xl md:text-4xl font-light tracking-tight text-white uppercase">
-                  PROJECTS
+                <div className="flex items-center gap-3">
+                  <span className="h-[1px] w-8 bg-gradient-to-r from-zinc-500 to-transparent" />
+                  <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-zinc-400">/ SELECTED CREATIONS</p>
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-extralight tracking-tight text-white uppercase mt-1">
+                  PROJECTS<span className="text-zinc-600 animate-pulse font-mono">_</span>
                 </h2>
               </div>
               <span className="font-mono text-[9px] tracking-widest text-zinc-500 bg-zinc-950/40 border border-white/5 rounded-full px-4 py-1.5 self-start sm:self-auto backdrop-blur-sm">
@@ -746,13 +773,172 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
             </div>
           </section>
 
+          {/* ACADEMICS / EDUCATION */}
+          <section id="education" className="border-t border-white/10 pt-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              <div className="lg:col-span-4 space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="h-[1px] w-8 bg-gradient-to-r from-zinc-500 to-transparent" />
+                  <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-zinc-400">/ ACADEMIC FOUNDATION</p>
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-extralight tracking-tight text-white uppercase mt-1">
+                  ACADEMICS<span className="text-zinc-600 animate-pulse font-mono">_</span>
+                </h2>
+                <p className="text-sm font-mono text-zinc-400">History log database timeline</p>
+              </div>
+              <div className="lg:col-span-8 relative py-4 pl-8 border-l border-white/10 space-y-12">
+                {currentPortfolioData.education.map((edu, index) => (
+                  <div key={index} className="relative group space-y-2">
+                    {/* Premium polished circular timeline node */}
+                    <div className="absolute -left-[36px] top-1.5 h-2.5 w-2.5 rounded-full bg-black border border-white/40 ring-4 ring-black group-hover:bg-white group-hover:border-white group-hover:ring-white/20 transition-all duration-350 shadow-[0_0_10px_rgba(0,0,0,0.8)]" />
+                    
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="font-mono text-xs tracking-wider text-zinc-300 bg-zinc-950/40 border border-white/10 px-2.5 py-1 rounded">
+                        {edu.period || "SCORE: " + edu.score}
+                      </span>
+                      {edu.score && edu.period && (
+                        <span className="font-mono text-xs tracking-wider text-zinc-400">
+                          SCORE: {edu.score}
+                        </span>
+                      )}
+                    </div>
+                    
+                    <h3 className="text-xl font-semibold tracking-tight text-white uppercase leading-none pt-1">
+                      {edu.degree}
+                    </h3>
+                    <h4 className="text-sm font-mono text-zinc-400">
+                      {edu.institution}
+                    </h4>
+                    {edu.details && (
+                      <p className="text-sm md:text-base text-zinc-300 leading-relaxed font-light pt-2">
+                        {edu.details}
+                      </p>
+                    )}
+                  </div>
+                ))}
+
+                {/* Additional Certifications Box */}
+                <div className="border border-white/5 bg-zinc-950/20 rounded-xl p-6 font-mono text-xs sm:text-sm text-zinc-400 space-y-3 mt-8">
+                  <span className="text-zinc-500 font-semibold uppercase tracking-wider block">/ADDITIONAL CERTIFICATIONS</span>
+                  <p className="text-zinc-200 font-light leading-relaxed">
+                    • Advanced Data Structures and Algorithms — Coursera
+                  </p>
+                  <p className="text-zinc-200 font-light leading-relaxed">
+                    • Advanced Approximation Algorithms — NPTEL Soft Computing Certification
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* CONTACT INQUIRY */}
+          <section id="contact" className="border-t border-white/10 pt-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              <div className="lg:col-span-5 space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="h-[1px] w-8 bg-gradient-to-r from-zinc-500 to-transparent" />
+                  <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-zinc-400">/ SECURE_COMM_PORT</p>
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-extralight tracking-tight text-white uppercase mt-1">
+                  CONTACT<span className="text-zinc-600 animate-pulse font-mono">_</span>
+                </h2>
+                <p className="text-zinc-300 text-sm md:text-base font-light leading-relaxed max-w-sm">
+                  Have an interesting opportunity, collaboration, or music production request? Establish connection here and log your message directly.
+                </p>
+                <div className="space-y-4 font-mono text-xs sm:text-sm tracking-wider text-zinc-400 border-t border-white/5 pt-6">
+                  <p className="flex items-center gap-2 hover:text-white transition-colors">
+                    <span className="text-zinc-500 font-medium">/EMAIL :</span> <a href={`mailto:${currentPortfolioData.contact.email}`}>{currentPortfolioData.contact.email}</a>
+                  </p>
+                  <p className="flex items-center gap-2 hover:text-white transition-colors">
+                    <span className="text-zinc-500 font-medium">/PHONE :</span> <a href="tel:+917439358307">+91 74393 58307</a>
+                  </p>
+                  <p className="flex items-center gap-2 hover:text-white transition-colors">
+                    <span className="text-zinc-500 font-medium">/LINKEDIN :</span> <a href={currentPortfolioData.contact.linkedin} target="_blank" rel="noreferrer">LINKEDIN Profile</a>
+                  </p>
+                  <p className="flex items-center gap-2 hover:text-white transition-colors">
+                    <span className="text-zinc-500 font-medium">/GITHUB :</span> <a href={currentPortfolioData.contact.github} target="_blank" rel="noreferrer">GITHUB Profile</a>
+                  </p>
+                  <p className="flex items-center gap-2 hover:text-white transition-colors">
+                    <span className="text-zinc-500 font-medium">/INSTAGRAM :</span> <a href={currentPortfolioData.contact.instagram} target="_blank" rel="noreferrer">INSTAGRAM Profile</a>
+                  </p>
+                </div>
+              </div>
+              <div className="lg:col-span-7">
+                {/* Premium Form with glassmorphic container and thin borders */}
+                <form onSubmit={handleFormSubmit} className="relative group bg-zinc-950/20 border border-white/10 p-6 md:p-8 space-y-6 rounded-2xl backdrop-blur-sm shadow-xl">
+                  {/* Decorative line */}
+                  <div className="absolute -inset-x-10 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-xs uppercase tracking-[0.1em] font-mono text-zinc-450 mb-2">Sender Name *</label>
+                      <input 
+                        type="text"
+                        required
+                        value={formName}
+                        onChange={e => setFormName(e.target.value)}
+                        className="w-full bg-zinc-900/30 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3.5 text-white text-sm font-mono focus:outline-none transition-colors"
+                        placeholder="NAME_ENTRY"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs uppercase tracking-[0.1em] font-mono text-zinc-450 mb-2">Email Address *</label>
+                      <input 
+                        type="email"
+                        required
+                        value={formEmail}
+                        onChange={e => setFormEmail(e.target.value)}
+                        className="w-full bg-zinc-900/30 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3.5 text-white text-sm font-mono focus:outline-none transition-colors"
+                        placeholder="EMAIL_ENTRY"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs uppercase tracking-[0.1em] font-mono text-zinc-450 mb-2">Subject (optional)</label>
+                    <input 
+                      type="text"
+                      value={formSubject}
+                      onChange={e => setFormSubject(e.target.value)}
+                      className="w-full bg-zinc-900/30 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3.5 text-white text-sm font-mono focus:outline-none transition-colors"
+                      placeholder="SUBJECT_ENTRY"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs uppercase tracking-[0.1em] font-mono text-zinc-450 mb-2">Message *</label>
+                    <textarea 
+                      required
+                      rows={5}
+                      value={formMessage}
+                      onChange={e => setFormMessage(e.target.value)}
+                      className="w-full bg-zinc-900/30 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3.5 text-white text-sm font-mono focus:outline-none transition-colors resize-none"
+                      placeholder="DETAILS_ENTRY..."
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isPending}
+                    className="w-full bg-white hover:bg-zinc-200 text-black font-mono text-xs sm:text-sm tracking-wider font-bold py-4 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 cursor-pointer"
+                  >
+                    {isPending ? "TRANSMITTING..." : "SEND_MESSAGE"}
+                  </button>
+                </form>
+            </div>
+          </div>
+        </section>
+
           {/* MUSIC & COVERS SECTION */}
           <section id="music" className="border-t border-white/10 pt-16 space-y-12">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
               <div className="space-y-2">
-                <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-zinc-500">/CREATIVE EXPRESSION</p>
-                <h2 className="text-3xl md:text-4xl font-light tracking-tight text-white uppercase">
-                  MUSIC & COVERS
+                <div className="flex items-center gap-3">
+                  <span className="h-[1px] w-8 bg-gradient-to-r from-zinc-500 to-transparent" />
+                  <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-zinc-400">/ CREATIVE EXPRESSION</p>
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-extralight tracking-tight text-white uppercase mt-1">
+                  MUSIC & COVERS<span className="text-zinc-600 animate-pulse font-mono">_</span>
                 </h2>
               </div>
               <a 
@@ -985,153 +1171,6 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
               </div>
             </div>
           </section>
-
-          {/* ACADEMICS / EDUCATION */}
-          <section id="education" className="border-t border-white/10 pt-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              <div className="lg:col-span-4 space-y-4">
-                <p className="text-xs font-mono tracking-[0.2em] uppercase text-zinc-500">/ACADEMIC FOUNDATION</p>
-                <h2 className="text-3xl md:text-4xl font-light tracking-tight text-white uppercase">
-                  ACADEMICS
-                </h2>
-                <p className="text-sm font-mono text-zinc-400">History log database timeline</p>
-              </div>
-              <div className="lg:col-span-8 relative py-4 pl-8 border-l border-white/10 space-y-12">
-                {currentPortfolioData.education.map((edu, index) => (
-                  <div key={index} className="relative group space-y-2">
-                    {/* Rotate silver metallic timeline node */}
-                    <div className="absolute -left-[40px] top-1 bg-black border border-white/20 h-4 w-4 rotate-45 group-hover:bg-white group-hover:border-white transition-all duration-300 shadow-[0_0_10px_rgba(0,0,0,0.8)]" />
-                    
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="font-mono text-xs tracking-wider text-zinc-300 bg-zinc-950/40 border border-white/10 px-2.5 py-1 rounded">
-                        {edu.period || "SCORE: " + edu.score}
-                      </span>
-                      {edu.score && edu.period && (
-                        <span className="font-mono text-xs tracking-wider text-zinc-400">
-                          SCORE: {edu.score}
-                        </span>
-                      )}
-                    </div>
-                    
-                    <h3 className="text-xl font-semibold tracking-tight text-white uppercase leading-none pt-1">
-                      {edu.degree}
-                    </h3>
-                    <h4 className="text-sm font-mono text-zinc-400">
-                      {edu.institution}
-                    </h4>
-                    {edu.details && (
-                      <p className="text-sm md:text-base text-zinc-300 leading-relaxed font-light pt-2">
-                        {edu.details}
-                      </p>
-                    )}
-                  </div>
-                ))}
-
-                {/* Additional Certifications Box */}
-                <div className="border border-white/5 bg-zinc-950/20 rounded-xl p-6 font-mono text-xs sm:text-sm text-zinc-400 space-y-3 mt-8">
-                  <span className="text-zinc-500 font-semibold uppercase tracking-wider block">/ADDITIONAL CERTIFICATIONS</span>
-                  <p className="text-zinc-200 font-light leading-relaxed">
-                    • Advanced Data Structures and Algorithms — Coursera
-                  </p>
-                  <p className="text-zinc-200 font-light leading-relaxed">
-                    • Advanced Approximation Algorithms — NPTEL Soft Computing Certification
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* CONTACT INQUIRY */}
-          <section id="contact" className="border-t border-white/10 pt-16">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              <div className="lg:col-span-5 space-y-6">
-                <p className="text-xs font-mono tracking-[0.2em] uppercase text-zinc-500">/SECURE_COMM_PORT</p>
-                <h2 className="text-3xl md:text-4xl font-light tracking-tight text-white uppercase">
-                  CONTACT
-                </h2>
-                <p className="text-zinc-300 text-sm md:text-base font-light leading-relaxed max-w-sm">
-                  Have an interesting opportunity, collaboration, or music production request? Establish connection here and log your message directly.
-                </p>
-                <div className="space-y-4 font-mono text-xs sm:text-sm tracking-wider text-zinc-400 border-t border-white/5 pt-6">
-                  <p className="flex items-center gap-2 hover:text-white transition-colors">
-                    <span className="text-zinc-500 font-medium">/EMAIL :</span> <a href={`mailto:${currentPortfolioData.contact.email}`}>{currentPortfolioData.contact.email}</a>
-                  </p>
-                  <p className="flex items-center gap-2 hover:text-white transition-colors">
-                    <span className="text-zinc-500 font-medium">/PHONE :</span> <a href="tel:+917439358307">+91 74393 58307</a>
-                  </p>
-                  <p className="flex items-center gap-2 hover:text-white transition-colors">
-                    <span className="text-zinc-500 font-medium">/LINKEDIN :</span> <a href={currentPortfolioData.contact.linkedin} target="_blank" rel="noreferrer">LINKEDIN Profile</a>
-                  </p>
-                  <p className="flex items-center gap-2 hover:text-white transition-colors">
-                    <span className="text-zinc-500 font-medium">/GITHUB :</span> <a href={currentPortfolioData.contact.github} target="_blank" rel="noreferrer">GITHUB Profile</a>
-                  </p>
-                </div>
-              </div>
-              <div className="lg:col-span-7">
-                {/* Premium Form with glassmorphic container and thin borders */}
-                <form onSubmit={handleFormSubmit} className="relative group bg-zinc-950/20 border border-white/10 p-6 md:p-8 space-y-6 rounded-2xl backdrop-blur-sm shadow-xl">
-                  {/* Decorative line */}
-                  <div className="absolute -inset-x-10 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-xs uppercase tracking-[0.1em] font-mono text-zinc-450 mb-2">Sender Name *</label>
-                      <input 
-                        type="text"
-                        required
-                        value={formName}
-                        onChange={e => setFormName(e.target.value)}
-                        className="w-full bg-zinc-900/30 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3.5 text-white text-sm font-mono focus:outline-none transition-colors"
-                        placeholder="NAME_ENTRY"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs uppercase tracking-[0.1em] font-mono text-zinc-450 mb-2">Email Address *</label>
-                      <input 
-                        type="email"
-                        required
-                        value={formEmail}
-                        onChange={e => setFormEmail(e.target.value)}
-                        className="w-full bg-zinc-900/30 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3.5 text-white text-sm font-mono focus:outline-none transition-colors"
-                        placeholder="EMAIL_ENTRY"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs uppercase tracking-[0.1em] font-mono text-zinc-450 mb-2">Subject (optional)</label>
-                    <input 
-                      type="text"
-                      value={formSubject}
-                      onChange={e => setFormSubject(e.target.value)}
-                      className="w-full bg-zinc-900/30 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3.5 text-white text-sm font-mono focus:outline-none transition-colors"
-                      placeholder="SUBJECT_ENTRY"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs uppercase tracking-[0.1em] font-mono text-zinc-450 mb-2">Message *</label>
-                    <textarea 
-                      required
-                      rows={5}
-                      value={formMessage}
-                      onChange={e => setFormMessage(e.target.value)}
-                      className="w-full bg-zinc-900/30 border border-white/10 focus:border-white/30 rounded-xl px-4 py-3.5 text-white text-sm font-mono focus:outline-none transition-colors resize-none"
-                      placeholder="DETAILS_ENTRY..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isPending}
-                    className="w-full bg-white hover:bg-zinc-200 text-black font-mono text-xs sm:text-sm tracking-wider font-bold py-4 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 cursor-pointer"
-                  >
-                    {isPending ? "TRANSMITTING..." : "SEND_MESSAGE"}
-                  </button>
-                </form>
-              </div>
-            </div>
-          </section>
         </main>
 
         {/* Footer */}
@@ -1143,6 +1182,9 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
                 <a href={currentPortfolioData.contact.github} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">GITHUB</a>
               )}
               <a href={currentPortfolioData.contact.linkedin} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">LINKEDIN</a>
+              {currentPortfolioData.contact.instagram && (
+                <a href={currentPortfolioData.contact.instagram} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">INSTAGRAM</a>
+              )}
             </div>
           </div>
         </footer>

@@ -1,4 +1,15 @@
 import mongoose from "mongoose"
+import dns from "dns"
+
+// Force Node.js to use Google and Cloudflare DNS to resolve MongoDB Atlas SRV records
+// (Prevents querySrv ECONNREFUSED errors on networks with restrictive local DNS)
+if (dns && typeof dns.setServers === "function") {
+  try {
+    dns.setServers(["8.8.8.8", "1.1.1.1"])
+  } catch (e) {
+    console.warn("Warning: Could not set public DNS servers, database connection may fail:", e)
+  }
+}
 
 const MONGODB_URI = process.env.MONGODB_URI
 
