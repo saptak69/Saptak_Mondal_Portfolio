@@ -129,30 +129,56 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   const [playbackProgress, setPlaybackProgress] = useState(0)
 
+  // Helper to parse duration string (e.g., "8:11", "1:17:16") to total seconds
+  const parseDuration = (durationStr: string) => {
+    const parts = durationStr.split(':').map(Number);
+    if (parts.length === 3) {
+      return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    }
+    if (parts.length === 2) {
+      return parts[0] * 60 + parts[1];
+    }
+    return 0;
+  };
+
+  // Helper to format seconds back to string (e.g., "1:17:16" or "5:04")
+  const formatTime = (seconds: number) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    if (h > 0) {
+      return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  };
+
   const tracks = [
     {
-      title: "Octavarium",
+      title: "Metropolis Pt. 2: Scenes from a Memory",
       artist: "Dream Theater",
-      duration: "24:00",
-      type: "Progressive Masterpiece",
-      description: "An orchestral and progressive heavy metal 24-minute masterpiece.",
-      youtubeUrl: "https://www.youtube.com/watch?v=PUpE4EPrw28"
+      duration: "1:17:16",
+      type: "Progressive Metal Concept Album",
+      description: "Dream Theater's landmark conceptual masterpiece exploring reincarnation, tragedy, and memory.",
+      youtubeUrl: "https://music.youtube.com/playlist?list=OLAK5uy_no4h8w4dhKZtqgM7ssWeBPI07BncIIZCE&si=w3O7ouUjsblybqz2",
+      coverUrl: "/metropolis_cover.jpg"
     },
     {
-      title: "Another Day",
+      title: "Pull Me Under (Images & Words)",
       artist: "Dream Theater",
-      duration: "4:23",
-      type: "Melodic Guitar Ballad",
-      description: "A beautiful ballad showcasing rich soaring guitar solos and sax tones.",
-      youtubeUrl: "https://www.youtube.com/watch?v=k38u44nK59Y"
+      duration: "57:04",
+      type: "Classic Progressive Metal",
+      description: "The classic breakthrough album featuring mind-bending instrumental interplay and soaring vocals.",
+      youtubeUrl: "https://music.youtube.com/playlist?list=OLAK5uy_l1xRaVChi3KmhOWg6rn4ADC1NJe6FYf3o&si=gkpgQ5jRkmEIendf",
+      coverUrl: "/images_words_cover.jpg"
     },
     {
-      title: "Pull Me Under",
-      artist: "Dream Theater",
-      duration: "8:11",
-      type: "Heavy Progressive Metal",
-      description: "Dream Theater's signature classic hit featuring heavy riffs and intricate time signatures.",
-      youtubeUrl: "https://www.youtube.com/watch?v=mipw-i2T9G4"
+      title: "Hail to the King",
+      artist: "Avenged Sevenfold",
+      duration: "53:11",
+      type: "Heavy Metal / Hard Rock",
+      description: "A tribute to metal royalty, built around massive mid-tempo grooves, epic solos, and dark gothic themes.",
+      youtubeUrl: "https://music.youtube.com/playlist?list=OLAK5uy_ng4ywPIdy9khiwH-oEqvCisM6YwZqZhcQ&si=SZmCmTRKLFBCmAS7",
+      coverUrl: "/hail_king_cover.jpg"
     }
   ]
 
@@ -714,7 +740,7 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
 
             {/* Brutalist Bento Project Grid with custom wireframes */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {currentPortfolioData.projects.map((project, index) => (
+              {currentPortfolioData.projects.map((project: any, index: number) => (
                 <div 
                   key={project._id || index}
                   onClick={() => trackProjectView(project._id)}
@@ -738,7 +764,7 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
                     </p>
                     
                     <div className="flex flex-wrap gap-2 pt-2">
-                      {project.technologies.map((tech) => (
+                      {project.technologies.map((tech: string) => (
                         <span key={tech} className="text-xs bg-zinc-950/40 text-zinc-300 border border-white/10 rounded-md px-2.5 py-1 font-mono uppercase tracking-wider">
                           #{tech}
                         </span>
@@ -787,7 +813,7 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
                 <p className="text-sm font-mono text-zinc-400">History log database timeline</p>
               </div>
               <div className="lg:col-span-8 relative py-4 pl-8 border-l border-white/10 space-y-12">
-                {currentPortfolioData.education.map((edu, index) => (
+                {currentPortfolioData.education.map((edu: any, index: number) => (
                   <div key={index} className="relative group space-y-2">
                     {/* Premium polished circular timeline node */}
                     <div className="absolute -left-[36px] top-1.5 h-2.5 w-2.5 rounded-full bg-black border border-white/40 ring-4 ring-black group-hover:bg-white group-hover:border-white group-hover:ring-white/20 transition-all duration-350 shadow-[0_0_10px_rgba(0,0,0,0.8)]" />
@@ -966,14 +992,14 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
                       <Disc className={`h-3 w-3 ${isPlaying ? 'animate-spin' : ''}`} style={{ animationDuration: '6s' }} />
                       AUDIO_SYS: CONNECTED
                     </span>
-                    <span>OCT_DRUM // GUITAR_REC</span>
+                    <span>{tracks[currentTrackIndex].title.split(" ")[0].toUpperCase()} // ALBUM_SYS</span>
                   </div>
 
                   {/* Album Cover Art (Blended nicely) */}
                   <div className="relative aspect-video rounded-xl overflow-hidden border border-white/5 bg-black/60">
                     <img 
-                      src="/music_cover.jpg" 
-                      alt="Guitar fretboard and audio waves artwork"
+                      src={tracks[currentTrackIndex].coverUrl || "/music_cover.jpg"} 
+                      alt={tracks[currentTrackIndex].title}
                       className="w-full h-full object-cover filter grayscale contrast-110 brightness-[0.45] opacity-50 group-hover:opacity-75 transition-opacity duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
@@ -1021,7 +1047,7 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
                       <div className="flex justify-between items-center text-[9px] font-mono text-zinc-500 tracking-wider">
                         <span>
                           {isPlaying 
-                            ? `0:${Math.floor((playbackProgress * (tracks[currentTrackIndex].title === "Octavarium" ? 1440 : tracks[currentTrackIndex].title === "Another Day" ? 263 : 491) / 100) % 60).toString().padStart(2, '0')}`
+                            ? formatTime(Math.floor((playbackProgress * parseDuration(tracks[currentTrackIndex].duration)) / 100))
                             : "0:00"}
                         </span>
                         <span>{tracks[currentTrackIndex].duration}</span>
@@ -1090,7 +1116,7 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
               {/* Right Side: Track Selector Panel */}
               <div className="lg:col-span-7 flex flex-col justify-between">
                 <div className="space-y-4 mt-8 lg:mt-0">
-                  <p className="text-xs md:text-sm font-mono tracking-wider text-zinc-400 uppercase">/SELECT DREAM THEATER TRACKS</p>
+                  <p className="text-xs md:text-sm font-mono tracking-wider text-zinc-400 uppercase">/SELECT OFFSCALE PLAYLIST</p>
                   
                   <div className="space-y-3">
                     {tracks.map((track, idx) => (
@@ -1176,7 +1202,7 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
         {/* Footer */}
         <footer className="border-t border-white/5 bg-zinc-950/40 py-10 px-6 mt-20">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[9px] tracking-widest text-zinc-650">
-            <p>&copy; {new Date().getFullYear()} {currentPortfolioData.name}. PREMIUM_DECK // v3.0</p>
+            <p>&copy; {new Date().getFullYear()} {currentPortfolioData.name}. All Rights Reserved.</p>
             <div className="flex space-x-6 font-mono">
               {currentPortfolioData.contact.github !== "#" && (
                 <a href={currentPortfolioData.contact.github} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">GITHUB</a>

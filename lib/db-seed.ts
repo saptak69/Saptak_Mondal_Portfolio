@@ -73,7 +73,10 @@ const defaultEducation = [
   }
 ]
 
+let isDatabaseSeeded = false
+
 export async function seedDatabase() {
+  if (isDatabaseSeeded) return
   await dbConnect()
   
   const projectCount = await Project.countDocuments()
@@ -102,4 +105,6 @@ export async function seedDatabase() {
     await Education.insertMany(defaultEducation)
     console.log("Seeded education successfully!")
   }
+  
+  isDatabaseSeeded = true
 }
