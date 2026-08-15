@@ -2,37 +2,54 @@
 
 import React from "react"
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, ArrowUp } from "lucide-react"
+import { motion } from "motion/react"
 
 export default function FooterEditorial() {
   return (
-    <footer className="py-20 bg-[#ffffff] border-t border-[#e6e4dc]">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-12">
+    <footer className="py-24 sm:py-32 bg-[#ffffff]">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Large Typography Statement */}
-        <div className="space-y-4 max-w-3xl">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="space-y-6 max-w-4xl"
+        >
           <span className="font-mono text-xs uppercase tracking-widest text-[#888888]">
             COLLABORATION &bull; CONTACT
           </span>
-          <h2 className="font-serif-editorial text-4xl sm:text-6xl font-normal text-[#111111] leading-tight">
+          <h2 className="font-serif-editorial text-5xl sm:text-6xl lg:text-7xl font-normal text-[#111111] leading-[1.05] tracking-tight">
             Let&apos;s Build Systems That Last Long!
           </h2>
-          <div className="pt-2">
+          <div className="pt-4">
             <a
               href="mailto:saptakmondal.official@gmail.com"
               data-cursor="OPEN"
-              className="group inline-flex items-center gap-2 font-serif-editorial text-2xl sm:text-3xl text-[#111111] hover:text-[#ea580c] transition-colors"
+              className="group inline-flex items-center gap-3 font-serif-editorial text-2xl sm:text-3xl lg:text-4xl text-[#111111] hover:text-[#ea580c] transition-colors duration-300"
             >
-              <span className="underline underline-offset-8 decoration-1 decoration-[#111111]/30 group-hover:decoration-[#ea580c] break-all sm:break-normal">
-                saptakmondal.official@gmail.com
+              <span className="relative">
+                <span className="break-all sm:break-normal">
+                  saptakmondal.official@gmail.com
+                </span>
+                {/* Animated underline that slides in from left on hover */}
+                <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[#ea580c] group-hover:w-full transition-all duration-500 ease-out" />
               </span>
-              <ArrowUpRight className="h-6 w-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              <ArrowUpRight className="h-7 w-7 sm:h-8 sm:w-8 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300 shrink-0" />
             </a>
           </div>
-        </div>
+        </motion.div>
 
         {/* Footer Navigation & Social Links */}
-        <div className="pt-8 border-t border-[#f0eee6] flex flex-col sm:flex-row items-center justify-between gap-6 font-mono text-xs text-[#888888]">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="pt-8 border-t border-[#e6e4dc] flex flex-col sm:flex-row items-center justify-between gap-6 font-mono text-xs text-[#888888]"
+        >
           <div className="space-y-1 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start gap-2 text-[#111111]">
               <span className="font-semibold">&copy; 2026 Saptak Mondal</span>
@@ -83,12 +100,13 @@ export default function FooterEditorial() {
 
             <a
               href="#hero"
-              className="hover:text-[#111111] transition border-l border-[#e6e4dc] pl-4 ml-2"
+              className="group hover:text-[#111111] transition border-l border-[#e6e4dc] pl-4 ml-2 inline-flex items-center gap-1.5"
             >
-              Top ↑
+              <span>Top</span>
+              <ArrowUp className="h-3 w-3 group-hover:-translate-y-1 transition-transform duration-300" />
             </a>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </footer>

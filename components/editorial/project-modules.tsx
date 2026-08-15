@@ -111,6 +111,7 @@ function EditorialProjectCard({
   const isInView = useInView(cardRef, { margin: "-20% 0px -20% 0px" })
   const [imgError, setImgError] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 })
 
   const env = projectEnvironmentMap[project.id] || {
     bgGradient: "from-[#18181b] via-[#27272a] to-[#09090b]",
@@ -121,6 +122,22 @@ function EditorialProjectCard({
   }
 
   const primaryImage = projectImageMap[project.id] || `/media/projects/${project.id}/hero.webp`
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget
+    const rect = card.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+    const rotateY = ((x - centerX) / centerX) * 3
+    const rotateX = ((centerY - y) / centerY) * 3
+    setTilt({ rotateX, rotateY })
+  }
+
+  const handleMouseLeave = () => {
+    setTilt({ rotateX: 0, rotateY: 0 })
+  }
 
   return (
     <div
@@ -138,6 +155,12 @@ function EditorialProjectCard({
           viewport={{ once: false, margin: "-10%" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="group relative w-full bg-[#ffffff] rounded-[24px] sm:rounded-[36px] border border-[#111111]/12 shadow-[0_18px_50px_rgba(0,0,0,0.06)] overflow-hidden transition-all duration-500 hover:shadow-[0_24px_60px_rgba(0,0,0,0.1)] p-4 sm:p-10 lg:p-12"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            transform: `perspective(1200px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
+            transition: tilt.rotateX === 0 && tilt.rotateY === 0 ? "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)" : "transform 0.1s ease-out",
+          }}
         >
           {/* Top Environmental Screenshot Presentation Area */}
           <div

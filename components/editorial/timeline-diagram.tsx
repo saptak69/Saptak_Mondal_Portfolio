@@ -2,6 +2,7 @@
 
 import React from "react"
 import SectionLabel from "./section-label"
+import { motion } from "motion/react"
 
 interface TimelineRow {
   role: string
@@ -39,8 +40,15 @@ const experienceRows: TimelineRow[] = [
 
 export default function TimelineDiagram() {
   return (
-    <section id="experience" className="py-20 border-b border-[#e6e4dc] bg-[#ffffff]">
+    <section id="experience" className="py-20 bg-[#ffffff]">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
         
         <SectionLabel
           label="EXPERIENCE & ACADEMICS • MINIMALIST TIMELINE"
@@ -91,8 +99,12 @@ export default function TimelineDiagram() {
           </div>
 
         </div>
+        </motion.div>
 
       </div>
+
+      {/* Soft gradient section divider */}
+      <div className="mt-20 h-px w-full bg-gradient-to-r from-transparent via-[#e6e4dc] to-transparent" />
     </section>
   )
 }

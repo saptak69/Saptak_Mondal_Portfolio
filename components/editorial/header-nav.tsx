@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { Volume2, VolumeX, ArrowRight, X, Shield } from "lucide-react"
+import { motion, useScroll } from "motion/react"
 
 interface HeaderNavProps {
   soundEnabled: boolean
@@ -27,6 +28,7 @@ export default function HeaderNav({
 }: HeaderNavProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { scrollYProgress } = useScroll()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,6 +55,12 @@ export default function HeaderNav({
 
   return (
     <>
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-[#ea580c] origin-left z-50"
+        style={{ scaleX: scrollYProgress }}
+      />
+
       <header
         className={`sticky top-0 z-40 w-full bg-[#ffffff]/85 backdrop-blur-md transition-all duration-300 ${
           scrolled ? "border-b border-[#eaeaea] shadow-sm py-3.5" : "border-b border-transparent py-5"

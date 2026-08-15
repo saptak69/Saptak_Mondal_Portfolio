@@ -3,18 +3,34 @@
 import React, { useState, useEffect } from "react"
 import Image from "next/image"
 import { ArrowDownRight, Zap } from "lucide-react"
+import { motion, AnimatePresence } from "motion/react"
+
+const rotatingIdentities = [
+  { text: "System Architect", color: "#ea580c" },
+  { text: "Full-Stack Developer", color: "#0d9488" },
+  { text: "Creative Engineer", color: "#ea580c" },
+  { text: "AI / ML Enthusiast", color: "#0d9488" },
+]
 
 export default function HeroSection() {
   const [imgError, setImgError] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [activeIdentity, setActiveIdentity] = useState(0)
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 50)
     return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIdentity((prev) => (prev + 1) % rotatingIdentities.length)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <section id="hero" className="pt-10 pb-16 sm:pt-20 sm:pb-28 border-b border-[#e6e4dc] bg-[#fbfaf7] overflow-hidden">
+    <section id="hero" className="pt-10 pb-16 sm:pt-20 sm:pb-28 border-b-0 bg-[#fbfaf7] overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         
         {/* Stagger 1 (0ms): Status Indicator 'shipped.' */}
@@ -56,6 +72,33 @@ export default function HeroSection() {
                   creative curiosity
                 </span>.
               </h1>
+            </div>
+
+            {/* Rotating Identity Tagline */}
+            <div
+              className={`transition-all duration-800 ease-out ${
+                isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+              }`}
+              style={{ transitionDelay: "250ms" }}
+            >
+              <div className="flex items-center gap-3 h-10 sm:h-12">
+                <span className="font-mono text-xs text-[#888888] uppercase tracking-widest shrink-0">Currently →</span>
+                <div className="relative overflow-hidden h-full flex items-center">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={activeIdentity}
+                      initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="font-serif-editorial text-2xl sm:text-3xl lg:text-4xl font-normal italic"
+                      style={{ color: rotatingIdentities[activeIdentity].color }}
+                    >
+                      {rotatingIdentities[activeIdentity].text}
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
+              </div>
             </div>
 
             {/* Stagger 4 (350ms): Bio Statement */}
@@ -149,6 +192,9 @@ export default function HeroSection() {
         </div>
 
       </div>
+
+      {/* Soft gradient section divider */}
+      <div className="mt-16 sm:mt-28 h-px w-full bg-gradient-to-r from-transparent via-[#e6e4dc] to-transparent" />
     </section>
   )
 }

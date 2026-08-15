@@ -4,6 +4,7 @@ import React, { useState, useTransition } from "react"
 import { Copy, Check, ArrowUpRight } from "lucide-react"
 import { createContactMessage } from "@/lib/actions"
 import { toast } from "sonner"
+import { motion } from "motion/react"
 
 interface ContactSectionProps {
   email: string
@@ -62,13 +63,19 @@ export default function ContactSection({
   }
 
   return (
-    <section id="contact" className="py-20 border-b border-[#e6e4dc]">
+    <section id="contact" className="py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         
         <div className="grid lg:grid-cols-12 gap-12">
           
           {/* Left Column: Editorial Ending Statement */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -25 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-6"
+          >
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#ea580c]" />
@@ -110,10 +117,16 @@ export default function ContactSection({
                 <ArrowUpRight className="h-4 w-4 text-[#ea580c]" />
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Dispatch Message Form */}
-          <div className="lg:col-span-7">
+          <motion.div
+            initial={{ opacity: 0, x: 25 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7"
+          >
             <div className="rounded-2xl border border-[#e6e4dc] bg-[#ffffff] p-6 sm:p-8 shadow-sm">
               <h3 className="font-mono text-xs uppercase text-[#888888] mb-6">
                 DISPATCH DIRECT MESSAGE
@@ -178,10 +191,13 @@ export default function ContactSection({
                 </button>
               </form>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
+
+      {/* Soft gradient section divider */}
+      <div className="mt-20 h-px w-full bg-gradient-to-r from-transparent via-[#e6e4dc] to-transparent" />
     </section>
   )
 }
