@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
 export default function FooterEditorial() {
@@ -71,6 +72,14 @@ export default function FooterEditorial() {
               <span>Resume</span>
               <ArrowUpRight className="h-3 w-3" />
             </a>
+
+            <Link
+              href="/admin"
+              className="hover:text-[#ea580c] hover:translate-x-0.5 transition-all inline-flex items-center gap-1 font-semibold text-[#111111]"
+            >
+              <span>SysAdmin</span>
+              <ArrowUpRight className="h-3 w-3 text-[#ea580c]" />
+            </Link>
 
             <a
               href="#hero"

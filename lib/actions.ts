@@ -13,7 +13,8 @@ export async function isAuth() {
   if (!token) return false
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as { username: string }
-    return decoded?.username === process.env.ADMIN_USERNAME
+    const expectedUsername = process.env.ADMIN_USERNAME || "admin"
+    return decoded?.username === expectedUsername
   } catch (e) {
     return false
   }

@@ -1,7 +1,8 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import { Volume2, VolumeX, ArrowRight, X } from "lucide-react"
+import Link from "next/link"
+import { Volume2, VolumeX, ArrowRight, X, Shield } from "lucide-react"
 
 interface HeaderNavProps {
   soundEnabled: boolean
@@ -16,6 +17,7 @@ const menuLinks = [
   { label: "Sandbox", href: "#sandbox", number: "04" },
   { label: "Contact", href: "#contact", number: "05" },
   { label: "Resume", href: "#contact", number: "06" },
+  { label: "Admin Controls", href: "/admin", number: "07" },
 ]
 
 export default function HeaderNav({
@@ -70,9 +72,20 @@ export default function HeaderNav({
             <span className="h-2 w-2 rounded-full bg-[#ea580c] group-hover:scale-125 transition-transform" />
           </a>
 
-          {/* Right Controls: Audio Toggle & Circular Menu Button */}
+          {/* Right Controls: Audio Toggle, Admin Button & Circular Menu Button */}
           <div className="flex items-center gap-3">
             
+            {/* Admin Portal Button */}
+            <Link
+              href="/admin"
+              onClick={() => onPlaySound("blip")}
+              className="flex h-9 items-center gap-1.5 px-3 rounded-full border border-[#eaeaea] bg-[#ffffff] text-xs font-mono text-[#666666] hover:text-[#111111] hover:border-[#111111] transition duration-200"
+              title="Admin Portal"
+            >
+              <Shield className="h-3.5 w-3.5 text-[#ea580c]" />
+              <span className="hidden sm:inline">Admin</span>
+            </Link>
+
             {/* Audio Toggle Button */}
             <button
               onClick={onToggleSound}
@@ -136,23 +149,27 @@ export default function HeaderNav({
         {/* Overlay Links List */}
         <div className="max-w-6xl mx-auto w-full my-auto py-8">
           <nav className="space-y-4 sm:space-y-6" aria-label="Overlay Navigation">
-            {menuLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => {
-                  onPlaySound("tap")
-                  setIsMenuOpen(false)
-                }}
-                className="group flex items-center justify-between py-2 border-b border-white/5 text-3xl sm:text-5xl lg:text-6xl font-serif-editorial text-gray-300 hover:text-white transition-all duration-300"
-              >
-                <div className="flex items-center gap-4 sm:gap-8 group-hover:translate-x-3 sm:group-hover:translate-x-4 transition-transform duration-300">
-                  <span className="font-mono text-xs sm:text-sm text-[#0d9488] font-semibold">{link.number}</span>
-                  <span>{link.label}</span>
-                </div>
-                <ArrowRight className="h-6 w-6 sm:h-10 sm:w-10 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#ea580c]" />
-              </a>
-            ))}
+            {menuLinks.map((link) => {
+              const isRoute = link.href.startsWith("/")
+              const LinkComp = isRoute ? Link : "a"
+              return (
+                <LinkComp
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => {
+                    onPlaySound("tap")
+                    setIsMenuOpen(false)
+                  }}
+                  className="group flex items-center justify-between py-2 border-b border-white/5 text-3xl sm:text-5xl lg:text-6xl font-serif-editorial text-gray-300 hover:text-white transition-all duration-300"
+                >
+                  <div className="flex items-center gap-4 sm:gap-8 group-hover:translate-x-3 sm:group-hover:translate-x-4 transition-transform duration-300">
+                    <span className="font-mono text-xs sm:text-sm text-[#0d9488] font-semibold">{link.number}</span>
+                    <span>{link.label}</span>
+                  </div>
+                  <ArrowRight className="h-6 w-6 sm:h-10 sm:w-10 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#ea580c]" />
+                </LinkComp>
+              )
+            })}
           </nav>
         </div>
 
