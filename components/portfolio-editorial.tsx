@@ -84,6 +84,8 @@ const defaultProjects: ProjectData[] = [
     category: "Full-Stack Web App",
     year: "2024",
     featured: true,
+    videoUrl: "/media/projects/mangrove/mangrove_cover.mp4",
+    heroImage: "/media/projects/mangrove/hero.webp",
     description:
       "A premium fashion brand streetwear e-commerce platform featuring high-fidelity animations, catalog filtering, responsive design, cart state synchronization, and render cloud deployment.",
     technologies: ["React", "Next.js", "Tailwind CSS", "MongoDB", "Framer Motion", "Render"],
@@ -106,6 +108,8 @@ const defaultProjects: ProjectData[] = [
     category: "Frontend & REST APIs",
     year: "2024",
     featured: false,
+    videoUrl: "/media/projects/plothole/plothole_cover.mp4",
+    heroImage: "/media/projects/plothole/hero.webp",
     description:
       "A modern movie review and discovery platform integrating third-party TMDB database REST APIs, debounced search, genre exploration, and responsive glassmorphic interfaces.",
     technologies: ["React", "Tailwind CSS", "REST API", "Vercel", "JavaScript"],
@@ -128,6 +132,8 @@ const defaultProjects: ProjectData[] = [
     category: "Backend & Financial Suite",
     year: "2024",
     featured: false,
+    videoUrl: "/media/projects/pennywise/pennywise_cover.mp4",
+    heroImage: "/media/projects/pennywise/hero.webp",
     description:
       "A financial expense tracker and budget management dashboard featuring detailed analytics, interactive Recharts graphs, and a Java Spring Boot REST backend with PostgreSQL.",
     technologies: ["React", "Spring Boot", "PostgreSQL", "JWT", "REST API", "Recharts"],
@@ -150,6 +156,8 @@ const defaultProjects: ProjectData[] = [
     category: "Real-Time Systems",
     year: "2024",
     featured: false,
+    videoUrl: "/media/projects/nexus/nexus_cover.mp4",
+    heroImage: "/media/projects/nexus/hero.webp",
     description:
       "A low-latency real-time collaborative chat application powered by WebSockets, featuring sub-15ms message delivery, live user presence heartbeats, and Supabase authentication.",
     technologies: ["React", "Node.js", "Express.js", "WebSockets", "Supabase", "Vercel"],
@@ -239,6 +247,8 @@ export default function PortfolioEditorial({ initialData }: { initialData?: any 
           category: matchedDefault?.category || "Full-Stack System",
           year: matchedDefault?.year || "2024",
           featured: slugId === "mangrove",
+          videoUrl: matchedDefault?.videoUrl || (slugId === "mangrove" ? "/media/projects/mangrove/mangrove_cover.mp4" : slugId === "plothole" ? "/media/projects/plothole/plothole_cover.mp4" : undefined),
+          heroImage: matchedDefault?.heroImage || `/media/projects/${slugId}/hero.webp`,
           description: matchedDefault?.description || p.description,
           technologies: matchedDefault?.technologies || p.technologies || [],
           liveUrl: matchedDefault?.liveUrl || p.liveUrl || "#",

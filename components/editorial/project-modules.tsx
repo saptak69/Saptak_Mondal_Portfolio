@@ -22,6 +22,7 @@ export interface ProjectData {
   highlights?: string[]
   architecture?: string
   heroImage?: string
+  videoUrl?: string
   readTime?: string
 }
 
@@ -93,6 +94,14 @@ const projectImageMap: Record<string, string> = {
   "release-pipeline": "/media/projects/release-pipeline/hero.webp",
 }
 
+// Default video reel mapping
+const projectVideoMap: Record<string, string> = {
+  mangrove: "/media/projects/mangrove/mangrove_cover.mp4",
+  plothole: "/media/projects/plothole/plothole_cover.mp4",
+  pennywise: "/media/projects/pennywise/pennywise_cover.mp4",
+  nexus: "/media/projects/nexus/nexus_cover.mp4",
+}
+
 // Individual Sticky Project Card Component
 function EditorialProjectCard({
   project,
@@ -108,6 +117,7 @@ function EditorialProjectCard({
   onPlaySound: (type: "blip" | "click" | "tap") => void
 }) {
   const cardRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const isInView = useInView(cardRef, { margin: "-20% 0px -20% 0px" })
   const [imgError, setImgError] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -121,7 +131,19 @@ function EditorialProjectCard({
     readTime: "Case Study • 15 mins read",
   }
 
-  const primaryImage = projectImageMap[project.id] || `/media/projects/${project.id}/hero.webp`
+  const primaryImage = project.heroImage || projectImageMap[project.id] || `/media/projects/${project.id}/hero.webp`
+  const primaryVideo = project.videoUrl || projectVideoMap[project.id]
+
+  // Play/pause video according to viewport visibility for seamless performance
+  React.useEffect(() => {
+    if (videoRef.current) {
+      if (isInView) {
+        videoRef.current.play().catch(() => {})
+      } else {
+        videoRef.current.pause()
+      }
+    }
+  }, [isInView])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget
@@ -162,7 +184,7 @@ function EditorialProjectCard({
             transition: tilt.rotateX === 0 && tilt.rotateY === 0 ? "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)" : "transform 0.1s ease-out",
           }}
         >
-          {/* Top Environmental Screenshot Presentation Area */}
+          {/* Top Environmental Screenshot / Video Presentation Area */}
           <div
             onClick={() => {
               onPlaySound("click")
@@ -185,10 +207,10 @@ function EditorialProjectCard({
               {/* Subtle Atmospheric Light Effect */}
               <div className="absolute inset-0 bg-radial from-white/10 via-transparent to-black/40 pointer-events-none" />
 
-              {/* Floating Product UI Screenshot Frame */}
+              {/* Floating Product UI Screenshot / Video Frame */}
               <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-black/40 flex items-center justify-center">
                 
-                {/* Reveal Animation for Screenshot: Semi-obscured blur -> full sharpness */}
+                {/* Reveal Animation for Media: Semi-obscured blur -> full sharpness */}
                 <motion.div
                   initial={{ opacity: 0.35, filter: "blur(10px)", scale: 1.04 }}
                   animate={
@@ -199,25 +221,48 @@ function EditorialProjectCard({
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
                   className="relative w-full h-full"
                 >
-                  <Image
-                    src={imgError ? "/placeholder-user.jpg" : primaryImage}
-                    alt={`${project.title} — Real Viewport Screenshot`}
-                    fill
-                    sizes="(max-width: 1200px) 100vw, 1050px"
-                    priority={index === 0}
-                    className="object-cover object-top transition-transform duration-700 ease-out group-hover/image:scale-[1.02]"
-                    onError={() => setImgError(true)}
-                    onLoad={() => setImageLoaded(true)}
-                  />
+                  {primaryVideo ? (
+                    <div className="relative w-full h-full">
+                      <video
+                        ref={videoRef}
+                        src={primaryVideo}
+                        poster={primaryImage}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                        className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover/image:scale-[1.02]"
+                      />
+
+                      {/* Centered Brutalist Bold Brand Name Overlay */}
+                      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none select-none px-4">
+                        <h2 className="font-sans font-black tracking-[0.22em] sm:tracking-[0.28em] text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl uppercase drop-shadow-[0_12px_36px_rgba(0,0,0,0.9)] transition-all duration-700 ease-out group-hover/image:scale-105">
+                          {project.id === "mangrove" ? "MANGROVE" : project.title.toUpperCase()}
+                        </h2>
+                      </div>
+                    </div>
+                  ) : (
+                    <Image
+                      src={imgError ? "/placeholder-user.jpg" : primaryImage}
+                      alt={`${project.title} — Real Viewport Screenshot`}
+                      fill
+                      sizes="(max-width: 1200px) 100vw, 1050px"
+                      priority={index === 0}
+                      className="object-cover object-top transition-transform duration-700 ease-out group-hover/image:scale-[1.02]"
+                      onError={() => setImgError(true)}
+                      onLoad={() => setImageLoaded(true)}
+                    />
+                  )}
 
                   {/* Glassmorphic Overlay Hover Effect */}
-                  <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/10 transition-colors duration-300" />
+                  <div className="absolute inset-0 bg-black/0 group-hover/image:bg-black/10 transition-colors duration-300 pointer-events-none" />
                 </motion.div>
 
                 {/* Subtle View Case Study Tag Overlay on Hover */}
-                <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
                   <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white font-mono text-xs border border-white/20 shadow-lg">
-                    <span>Inspect System</span>
+                    <span>Inspect System &amp; Gallery</span>
                     <ArrowUpRight className="h-3.5 w-3.5" />
                   </span>
                 </div>

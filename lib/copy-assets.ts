@@ -117,6 +117,43 @@ export function ensureMediaAssets() {
       copyToProject("mangrove_catalog", "mangrove", "catalog")
       copyToProject("mangrove_feature", "mangrove", "feature")
 
+      // Ensure video covers exist for mangrove, plothole, nexus, and pennywise in both public/media/projects/<slug> and public/project/<slug>
+      ;["mangrove", "plothole", "pennywise", "nexus"].forEach((slug) => {
+        const mediaDir = path.join(projectsMediaDir, slug)
+        const legacyDir = path.join(publicDir, "project", slug)
+        const targetCoverName = `${slug}_cover.mp4`
+        const mediaCoverPath = path.join(mediaDir, targetCoverName)
+        const legacyCoverPath = path.join(legacyDir, targetCoverName)
+
+        if (!fs.existsSync(mediaDir)) fs.mkdirSync(mediaDir, { recursive: true })
+        if (!fs.existsSync(legacyDir)) fs.mkdirSync(legacyDir, { recursive: true })
+
+        if (fs.existsSync(mediaCoverPath) && !fs.existsSync(legacyCoverPath)) {
+          fs.copyFileSync(mediaCoverPath, legacyCoverPath)
+        } else if (fs.existsSync(legacyCoverPath) && !fs.existsSync(mediaCoverPath)) {
+          fs.copyFileSync(legacyCoverPath, mediaCoverPath)
+        } else if (!fs.existsSync(mediaCoverPath) && !fs.existsSync(legacyCoverPath)) {
+          // Look for any .mp4 file in legacy or media directory
+          const findMp4 = (dir: string) => {
+            if (!fs.existsSync(dir)) return null
+            const files = fs.readdirSync(dir)
+            return files.find((f) => f.endsWith(".mp4"))
+          }
+          const legacyMp4 = findMp4(legacyDir)
+          const mediaMp4 = findMp4(mediaDir)
+
+          if (legacyMp4) {
+            const src = path.join(legacyDir, legacyMp4)
+            fs.copyFileSync(src, legacyCoverPath)
+            fs.copyFileSync(src, mediaCoverPath)
+          } else if (mediaMp4) {
+            const src = path.join(mediaDir, mediaMp4)
+            fs.copyFileSync(src, legacyCoverPath)
+            fs.copyFileSync(src, mediaCoverPath)
+          }
+        }
+      })
+
       // Sync AI-generated visuals for non-deployed projects (MedFinder & Release Pipeline)
       const copyAiImage = (filePattern: string, projectSlug: string) => {
         const matchingFile = brainFiles.find((f) => f.startsWith(filePattern) && (f.endsWith(".jpg") || f.endsWith(".png")))

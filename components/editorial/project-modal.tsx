@@ -20,7 +20,7 @@ interface GalleryItem {
 
 const projectGalleryMap: Record<string, GalleryItem[]> = {
   plothole: [
-    { title: "Movie Discovery & Search", label: "Primary App View", src: "/media/projects/plothole/hero.webp" },
+    { title: "Movie Discovery & Search (Cover View)", label: "Primary Cover View", src: "/media/projects/plothole/hero.webp" },
     { title: "Movie Details & Ratings", label: "Detail View", src: "/media/projects/plothole/movie.webp" },
     { title: "Reviews & Discussion Archive", label: "Community View", src: "/media/projects/plothole/discussion.webp" },
     { title: "Cinematic Home Grid", label: "Home Viewport", src: "/media/projects/plothole/home.webp" },
@@ -31,7 +31,7 @@ const projectGalleryMap: Record<string, GalleryItem[]> = {
     { title: "Interactive Analytics & Cashflow", label: "Analytics View", src: "/media/projects/pennywise/hero.webp" },
   ],
   mangrove: [
-    { title: "Storefront & Hero Banner", label: "Primary Store View", src: "/media/projects/mangrove/hero.webp" },
+    { title: "Storefront & Hero Banner (Cover View)", label: "Primary Store View / Cover", src: "/media/projects/mangrove/hero.webp" },
     { title: "Streetwear Product Catalog", label: "Catalog Grid View", src: "/media/projects/mangrove/catalog.webp" },
     { title: "Interactive Features & Showcase", label: "Feature View", src: "/media/projects/mangrove/feature.webp" },
   ],
@@ -258,7 +258,16 @@ export default function ProjectModal({
               {galleryItems.map((item, index) => (
                 <div
                   key={index}
-                  className="rounded-xl border border-[#e6e4dc] bg-[#ffffff] p-2 space-y-2 shadow-xs"
+                  onClick={() => setActiveLightboxImg(item)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault()
+                      setActiveLightboxImg(item)
+                    }
+                  }}
+                  className="group/gallery rounded-xl border border-[#e6e4dc] bg-[#ffffff] p-2 space-y-2 shadow-xs cursor-pointer hover:border-[#0d9488]/50 hover:shadow-md transition-all duration-300"
                 >
                   <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg bg-[#f4f3ee]">
                     <Image
@@ -266,11 +275,17 @@ export default function ProjectModal({
                       alt={item.title}
                       fill
                       unoptimized
-                      className="object-cover object-top"
+                      className="object-cover object-top transition-transform duration-500 group-hover/gallery:scale-[1.02]"
                     />
+                    <div className="absolute inset-0 bg-black/0 group-hover/gallery:bg-black/25 transition-colors duration-300 flex items-center justify-center pointer-events-none">
+                      <span className="opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-300 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/80 backdrop-blur-md text-white font-mono text-xs border border-white/20 shadow-lg">
+                        <ZoomIn className="h-3.5 w-3.5 text-[#0d9488]" />
+                        <span>Inspect Full Screenshot</span>
+                      </span>
+                    </div>
                   </div>
                   <div className="flex items-center justify-between font-mono text-xs px-2 py-1">
-                    <span className="font-medium text-[#111111]">{item.title}</span>
+                    <span className="font-medium text-[#111111] group-hover/gallery:text-[#0d9488] transition-colors">{item.title}</span>
                     <span className="text-[#0d9488] text-[10px] font-semibold uppercase">{item.label}</span>
                   </div>
                 </div>
