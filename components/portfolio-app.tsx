@@ -3,7 +3,7 @@
 import { useEffect, useState, useTransition } from "react"
 import { createContactMessage } from "@/lib/actions"
 import { Toaster, toast } from "sonner"
-import { Github, Linkedin, ExternalLink, Menu, X, Database, Monitor, Play, Pause, SkipForward, SkipBack, Instagram, Music, Disc, Terminal, Code, Cpu } from "lucide-react"
+import { Github, Linkedin, ExternalLink, Menu, X, Database, Monitor, Play, Pause, SkipForward, SkipBack, Instagram, Music, Disc, Terminal, Code, Cpu, Copy, Download } from "lucide-react"
 
 const portfolioData = {
   name: "Saptak Mondal",
@@ -640,6 +640,14 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
                   >
                     SCAN PROJECTS
                   </a>
+                  <a 
+                    href="/Saptak_Mondal_Resume.pdf" 
+                    download
+                    className="border border-white/20 hover:border-white/40 text-zinc-200 hover:text-white uppercase py-3.5 px-7 sm:py-4 sm:px-8 rounded-full transition-all duration-300 bg-zinc-950/10 flex items-center gap-2"
+                  >
+                    <span>RESUME_CV</span>
+                    <Download className="h-3.5 w-3.5" />
+                  </a>
                 </div>
               </div>
 
@@ -872,11 +880,35 @@ export default function PortfolioApp({ initialData }: { initialData?: any }) {
                   Have an interesting opportunity, collaboration, or music production request? Establish connection here and log your message directly.
                 </p>
                 <div className="space-y-4 font-mono text-xs sm:text-sm tracking-wider text-zinc-400 border-t border-white/5 pt-6">
-                  <p className="flex items-center gap-2 hover:text-white transition-colors">
-                    <span className="text-zinc-500 font-medium">/EMAIL :</span> <a href={`mailto:${currentPortfolioData.contact.email}`}>{currentPortfolioData.contact.email}</a>
+                  <p className="flex items-center gap-2 hover:text-white transition-colors group/item">
+                    <span className="text-zinc-500 font-medium">/EMAIL :</span> 
+                    <a href={`mailto:${currentPortfolioData.contact.email}`}>{currentPortfolioData.contact.email}</a>
+                    <button 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigator.clipboard.writeText(currentPortfolioData.contact.email);
+                        toast.success("Email copied to clipboard!");
+                      }}
+                      className="opacity-0 group-hover/item:opacity-100 p-1 hover:text-white text-zinc-500 rounded transition-all ml-1 cursor-pointer"
+                      title="Copy Email"
+                    >
+                      <Copy className="h-3.5 w-3.5" />
+                    </button>
                   </p>
-                  <p className="flex items-center gap-2 hover:text-white transition-colors">
-                    <span className="text-zinc-500 font-medium">/PHONE :</span> <a href="tel:+917439358307">+91 74393 58307</a>
+                  <p className="flex items-center gap-2 hover:text-white transition-colors group/item">
+                    <span className="text-zinc-500 font-medium">/PHONE :</span> 
+                    <a href="tel:+917439358307">+91 74393 58307</a>
+                    <button 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigator.clipboard.writeText("+917439358307");
+                        toast.success("Phone number copied to clipboard!");
+                      }}
+                      className="opacity-0 group-hover/item:opacity-100 p-1 hover:text-white text-zinc-500 rounded transition-all ml-1 cursor-pointer"
+                      title="Copy Phone Number"
+                    >
+                      <Copy className="h-3.5 w-3.5" />
+                    </button>
                   </p>
                   <p className="flex items-center gap-2 hover:text-white transition-colors">
                     <span className="text-zinc-500 font-medium">/LINKEDIN :</span> <a href={currentPortfolioData.contact.linkedin} target="_blank" rel="noreferrer">LINKEDIN Profile</a>

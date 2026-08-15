@@ -49,7 +49,7 @@ export async function getPortfolioData() {
   await dbConnect()
   await seedDatabase()
   
-  const projects = await Project.find({}).sort({ createdAt: -1 })
+  const projects = await Project.find({}).sort({ createdAt: 1 })
   const skills = await Skill.find({}).sort({ name: 1 })
   const education = await Education.find({}).sort({ createdAt: 1 })
   

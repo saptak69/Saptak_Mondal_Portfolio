@@ -1,8 +1,12 @@
-import PortfolioApp from "@/components/portfolio-app"
+import PortfolioEditorial from "@/components/portfolio-editorial"
 import { getPortfolioData } from "@/lib/actions"
+import { ensureMediaAssets } from "@/lib/copy-assets"
+
+ensureMediaAssets()
 
 export const revalidate = 0
 
+// Re-evaluating server state for project ordering
 const fallbackData = {
   projects: [
     {
@@ -20,6 +24,13 @@ const fallbackData = {
       repoUrl: "https://github.com/saptak69",
     },
     {
+      title: "PennyWise",
+      description: "A premium, brutalist-inspired expense tracker and budget management dashboard featuring detailed analytics, interactive charts, and secure multi-role access.",
+      technologies: ["React", "Spring Boot", "PostgreSQL", "JWT", "REST API", "Recharts"],
+      liveUrl: "https://pennywise-m0y1zivhb-saptaks-projects.vercel.app/login",
+      repoUrl: "https://github.com/saptak69",
+    },
+    {
       title: "Nexus",
       description: "A low-latency real-time chat application powered by WebSockets, featuring an interactive messaging interface, user presence, and robust authentication.",
       technologies: ["React", "Node.js", "Express.js", "WebSockets", "Supabase", "Vercel"],
@@ -27,16 +38,9 @@ const fallbackData = {
       repoUrl: "https://github.com/saptak69",
     },
     {
-      title: "PennyWise",
-      description: "A premium, brutalist-inspired expense tracker and budget management dashboard featuring detailed analytics, interactive charts, and secure multi-role access.",
-      technologies: ["React", "Spring Boot", "PostgreSQL", "JWT", "REST API", "Recharts"],
-      liveUrl: "#",
-      repoUrl: "https://github.com/saptak69",
-    },
-    {
-      title: "ML Disease Prediction",
-      description: "Final year engineering major project executing predictive analytics for disease detection and automated medicine recommendations using Machine Learning models.",
-      technologies: ["Python", "Machine Learning", "Java", "REST API", "Healthcare AI"],
+      title: "MedFinder",
+      description: "A medical-technology diagnostic platform implementing predictive classification algorithms for early disease detection, clinical symptom matrix parsing, and automated medicine recommendations.",
+      technologies: ["Python", "Scikit-Learn", "Java", "REST API", "Healthcare AI"],
       liveUrl: "#",
       repoUrl: "https://github.com/saptak69",
     },
@@ -76,6 +80,8 @@ const fallbackData = {
 }
 
 export default async function Page() {
+  ensureMediaAssets()
+
   let initialData = fallbackData
   try {
     const data = await getPortfolioData()
@@ -86,5 +92,5 @@ export default async function Page() {
     console.error("Database connection failed. Serving fallback data:", e)
   }
   
-  return <PortfolioApp initialData={initialData} />
+  return <PortfolioEditorial initialData={initialData} />
 }

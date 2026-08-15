@@ -1,28 +1,33 @@
-# Saptak Mondal | Interactive Portfolio & Music Console
+# Saptak Mondal | Creative Technologist & Software Engineering Archive
 
-A premium, brutalist-inspired personal portfolio and progressive music player console built with **Next.js 14**, **React 18**, **Tailwind CSS**, and **MongoDB/Mongoose**. 
+An editorial, minimal, and typography-driven personal portfolio and creative technology archive built with **Next.js 14 (App Router)**, **React 18**, **Tailwind CSS**, and **MongoDB / Mongoose ODM**.
 
-🔗 **New Repository**: [saptak69/Saptak_Mondal_Portfolio](https://github.com/saptak69/Saptak_Mondal_Portfolio)
+🔗 **Repository**: [saptak69/Saptak_Mondal_Portfolio](https://github.com/saptak69/Saptak_Mondal_Portfolio)
 
 ---
 
-## ⚡ Key Architectural Features
+## ⚡ Design Philosophy & Architectural System
 
-1. **🎭 Rotating Typography Hero**: Cycles dynamically through engineering and product focus tags: *Full Stack Developer, Software Engineer, Computer Science Engineer, UI/UX Enthusiast, and Product Builder*.
-2. **📈 Monochromatic ASCII Layout Schematics**: Each project card features a custom, hover-activated visual mockup (storefront grids for *Mangrove*, bar charts for *PennyWise*, poster cards for *PlotHole*, WebSocket message logs for *Nexus*, Docker builds for *Automated Pipelines*, and diagnosis telemetry for *ML Prediction*).
-3. **🎵 Progressive Rock Music Module**: Interactive audio player console featuring Dream Theater arrangements, simulated bouncing visualizer soundwaves, Youtube direct streaming, and Instagram covers telemetry.
-4. **🎓 Timeline Academics & Credentials**: Vertical timeline displaying graduation status, coursework, and Coursera/NPTEL certificates in a custom-engineered, monochromatic card format.
-5. **📊 Database Seeding & Fallback**: Embedded Mongoose loader that dynamically updates database fields on start, complete with robust local JSON fallback variables in case of database connection issues.
-6. **🔒 Secure SysAdmin Console**: Private admin pathway supporting JWT cookies, credentials matching, and live database administration for projects, skills, education tracking, and contact message aggregation.
+1. **📰 Editorial Visual Language**: Warm off-white canvas (`#fbfaf7`), near-black typography (`#111111`), delicate 1px borders (`#e6e4dc`), and generous whitespace inspired by modern printed periodicals and creative technology archives.
+2. **🖋️ Typographic Precision**: Harmonious pairing of **Newsreader** / **Cormorant Garamond** for large editorial display statements and **Plus Jakarta Sans** & **JetBrains Mono** for clean UI, labels, and metadata.
+3. **🪪 Interactive Identity Cards**: Four interactive profile facets (**Engineer**, **Builder**, **Musician**, **Explorer**) with line illustrations and subtle hover kinematics.
+4. **🧠 "How I Think & Build" Process**: 6-stage engineering lifecycle (**Idea** ➔ **Research** ➔ **Design** ➔ **Build** ➔ **Break** ➔ **Improve**) deconstructing how problems are solved.
+5. **🔍 "Search My Brain" Interactive Discovery**: Instant query engine across all portfolio content (skills, systems, progressive rock, education, and curiosities).
+6. **📦 Case-Study Editorial Modules**: Multi-layout project showcase (featured horizontal case study, split-screen modules, modular grid) with deep-dive story drawers including the Problem, Solution Architecture, Key Features, and Live/GitHub links.
+7. **🌳 Information Architecture / Skills Flow-Map**: Visual hierarchy organizing backend systems, reactive UI engineering, database storage, DevOps tooling, and machine learning foundations.
+8. **🎨 Playground & Personal Collage**: Modular showcase covering progressive guitar tone theory, distributed WebSockets, active research, engineering craftsmanship philosophy, and workspace setup.
+9. **🎵 Progressive Rock & Metal Audio Deck**: Monochromatic sound console featuring curated Dream Theater (*Metropolis Pt. 2*, *Images and Words*) and Avenged Sevenfold (*Hail to the King*) with subtle equalizer waves and direct streaming links.
+10. **🎓 Academic Credentials & Timeline**: Vertical chronological milestone tracking B.Tech CSE graduation at Guru Nanak Institute of Technology, Hindu School, and Scottish Church Collegiate School.
 
 ---
 
 ## 🛠️ Technology Stack
 
-* **Frontend**: Next.js 14 (App Router), React 18, Tailwind CSS, Lucide-React Icons
+* **Frontend**: Next.js 14 (App Router), React 18, Tailwind CSS, Lucide-React Icons, Sonner
+* **Typography**: Google Fonts (Newsreader, Cormorant Garamond, Plus Jakarta Sans, JetBrains Mono)
 * **Backend**: Next.js Server Actions, Next.js API Routes, JSON Web Tokens (JWT)
 * **Database**: MongoDB Atlas, Mongoose ODM
-* **Deployment**: Vercel (Frontend), Render (Live Projects)
+* **Deployment**: Vercel (Frontend), Render (Live Microservices)
 
 ---
 
@@ -45,14 +50,14 @@ ADMIN_PASSWORD=your_secure_password
 
 ### 3. Install Dependencies
 ```bash
-pnpm install
-# or npm install
+npm install
+# or pnpm install
 ```
 
 ### 4. Run Development Server
 ```bash
-pnpm dev
-# or npm run dev
+npm run dev
+# or pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
@@ -61,4 +66,4 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## 📦 Deployment on Vercel
 
-To deploy on Vercel, link your new GitHub repository, add the environment variables in the Vercel dashboard, and click **Deploy**. The project will build automatically using the default settings.
+Link your repository in the Vercel dashboard, provide the environment variables, and deploy with zero manual configuration.

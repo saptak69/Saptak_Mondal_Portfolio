@@ -17,17 +17,17 @@ const defaultProjects = [
     repoUrl: "https://github.com/saptak69",
   },
   {
+    title: "PennyWise",
+    description: "A premium, brutalist-inspired expense tracker and budget management dashboard featuring detailed analytics, interactive charts, and secure multi-role access.",
+    technologies: ["React", "Spring Boot", "PostgreSQL", "JWT", "REST API", "Recharts"],
+    liveUrl: "https://pennywise-m0y1zivhb-saptaks-projects.vercel.app/login",
+    repoUrl: "https://github.com/saptak69",
+  },
+  {
     title: "Nexus",
     description: "A low-latency real-time chat application powered by WebSockets, featuring an interactive messaging interface, user presence, and robust authentication.",
     technologies: ["React", "Node.js", "Express.js", "WebSockets", "Supabase", "Vercel"],
     liveUrl: "https://nexus-chat-iota-dun.vercel.app/",
-    repoUrl: "https://github.com/saptak69",
-  },
-  {
-    title: "PennyWise",
-    description: "A premium, brutalist-inspired expense tracker and budget management dashboard featuring detailed analytics, interactive charts, and secure multi-role access.",
-    technologies: ["React", "Spring Boot", "PostgreSQL", "JWT", "REST API", "Recharts"],
-    liveUrl: "#",
     repoUrl: "https://github.com/saptak69",
   },
   {
@@ -79,20 +79,12 @@ export async function seedDatabase() {
   if (isDatabaseSeeded) return
   await dbConnect()
   
-  const projectCount = await Project.countDocuments()
-  
-  // Clean up old seeds/duplicates (check if old project name exists or new one is missing)
-  const hasOldSeed = await Project.findOne({ title: "ML Medicine Alternative Finder" })
-  const hasNewSeed = await Project.findOne({ title: "PlotHole" })
-  
-  if (projectCount === 0 || hasOldSeed || !hasNewSeed) {
-    // Reset database to the correct initial dynamic list
+  const firstDoc = await Project.findOne({})
+  if (!firstDoc || firstDoc.title !== "Mangrove") {
     await Project.deleteMany({})
     await Project.insertMany(defaultProjects)
-    console.log("Seeded projects successfully!")
-    
-    await Skill.deleteMany({})
     const skillsToInsert = defaultSkills.map(name => ({ name, category: "General" }))
+    await Skill.deleteMany({})
     await Skill.insertMany(skillsToInsert)
     console.log("Seeded skills successfully!")
   }
