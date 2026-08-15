@@ -149,11 +149,11 @@ export default function AudioDeck({ onPlaySound }: AudioDeckProps) {
             target="_blank"
             rel="noreferrer"
             onClick={() => onPlaySound("click")}
-            className="inline-flex items-center gap-2 rounded-xl border border-[#e6e4dc] bg-[#ffffff] px-5 py-3 text-xs font-mono text-[#111111] hover:border-[#0d9488] hover:text-[#0d9488] transition shadow-xs"
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#e6e4dc] bg-[#ffffff] px-4 sm:px-5 py-3 text-xs font-mono text-[#111111] hover:border-[#0d9488] hover:text-[#0d9488] transition shadow-xs text-center flex-wrap sm:flex-nowrap"
           >
-            <Instagram className="h-4 w-4 text-[#ea580c]" />
+            <Instagram className="h-4 w-4 text-[#ea580c] shrink-0" />
             <span>Watch My Heavy Metal &amp; Prog Guitar Covers on Instagram</span>
-            <ExternalLink className="h-3.5 w-3.5 text-[#0d9488]" />
+            <ExternalLink className="h-3.5 w-3.5 text-[#0d9488] shrink-0 hidden sm:inline-block" />
           </a>
         </div>
 

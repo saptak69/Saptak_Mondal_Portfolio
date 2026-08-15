@@ -92,7 +92,7 @@ export default function ContactSection({
               >
                 <div>
                   <span className="text-[#888888] block text-[10px]">EMAIL ADDRESS</span>
-                  <span className="text-[#0d9488] font-semibold">{email}</span>
+                  <span className="text-[#0d9488] font-semibold break-all sm:break-normal">{email}</span>
                 </div>
                 {copiedEmail ? <Check className="h-4 w-4 text-[#0d9488]" /> : <Copy className="h-4 w-4 text-[#888888]" />}
               </button>

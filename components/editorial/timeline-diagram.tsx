@@ -51,34 +51,39 @@ export default function TimelineDiagram() {
         {/* Minimalist Table View */}
         <div className="rounded-2xl border border-[#e6e4dc] bg-[#ffffff] overflow-hidden shadow-sm">
           
-          {/* Table Header */}
-          <div className="grid grid-cols-12 gap-4 bg-[#fbfaf7] px-6 py-3.5 border-b border-[#e6e4dc] font-mono text-[11px] uppercase tracking-widest text-[#888888]">
-            <div className="col-span-5 sm:col-span-5">ROLE / MILESTONE</div>
-            <div className="col-span-4 sm:col-span-4">INSTITUTION / ORGANIZATION</div>
-            <div className="col-span-3 sm:col-span-3 text-right">DATE</div>
+          {/* Table Header (Desktop) */}
+          <div className="hidden sm:grid grid-cols-12 gap-4 bg-[#fbfaf7] px-6 py-3.5 border-b border-[#e6e4dc] font-mono text-[11px] uppercase tracking-widest text-[#888888]">
+            <div className="col-span-5">ROLE / MILESTONE</div>
+            <div className="col-span-4">INSTITUTION / ORGANIZATION</div>
+            <div className="col-span-3 text-right">DATE</div>
           </div>
 
-          {/* Table Rows */}
+          {/* Table Rows (Responsive Stack on Mobile, 12-col Grid on Desktop) */}
           <div className="divide-y divide-[#e6e4dc]">
             {experienceRows.map((row, idx) => (
               <div
                 key={idx}
-                className="group grid grid-cols-12 gap-4 px-6 py-5 items-center transition-colors duration-200 hover:bg-[#f7f6f1]/80 cursor-default"
+                className="group p-5 sm:px-6 sm:py-5 flex flex-col sm:grid sm:grid-cols-12 gap-2 sm:gap-4 sm:items-center transition-colors duration-200 hover:bg-[#f7f6f1]/80 cursor-default"
               >
-                <div className="col-span-5 sm:col-span-5 space-y-1">
-                  <h3 className="font-serif-editorial text-lg sm:text-xl font-normal text-[#111111] group-hover:font-semibold transition-all">
-                    {row.role}
-                  </h3>
-                  <p className="text-xs text-[#666666] font-sans line-clamp-1 hidden sm:block">
+                <div className="col-span-5 space-y-1">
+                  <div className="flex items-center justify-between gap-2 sm:block">
+                    <h3 className="font-serif-editorial text-lg sm:text-xl font-medium sm:font-normal text-[#111111] group-hover:text-[#ea580c] transition-colors">
+                      {row.role}
+                    </h3>
+                    <span className="font-mono text-xs text-[#ea580c] font-semibold sm:hidden shrink-0">
+                      {row.date}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#555555] font-sans">
                     {row.details}
                   </p>
                 </div>
 
-                <div className="col-span-4 sm:col-span-4 font-mono text-xs text-[#555555]">
+                <div className="col-span-4 font-mono text-xs text-[#0d9488] sm:text-[#555555] font-semibold sm:font-normal pt-1 sm:pt-0">
                   {row.institution}
                 </div>
 
-                <div className="col-span-3 sm:col-span-3 text-right font-mono text-xs text-[#888888] group-hover:text-[#111111] group-hover:translate-x-1 transition-all">
+                <div className="col-span-3 text-right font-mono text-xs text-[#888888] group-hover:text-[#111111] group-hover:translate-x-1 transition-all hidden sm:block">
                   {row.date}
                 </div>
               </div>

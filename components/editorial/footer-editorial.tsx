@@ -23,7 +23,7 @@ export default function FooterEditorial() {
               data-cursor="OPEN"
               className="group inline-flex items-center gap-2 font-serif-editorial text-2xl sm:text-3xl text-[#111111] hover:text-[#ea580c] transition-colors"
             >
-              <span className="underline underline-offset-8 decoration-1 decoration-[#111111]/30 group-hover:decoration-[#ea580c]">
+              <span className="underline underline-offset-8 decoration-1 decoration-[#111111]/30 group-hover:decoration-[#ea580c] break-all sm:break-normal">
                 saptakmondal.official@gmail.com
               </span>
               <ArrowUpRight className="h-6 w-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

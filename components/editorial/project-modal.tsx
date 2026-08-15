@@ -96,13 +96,13 @@ export default function ProjectModal({
         onClick={onClose}
       >
         <div
-          className="w-full max-w-4xl rounded-2xl border border-[#e6e4dc] bg-[#ffffff] p-6 sm:p-10 shadow-2xl space-y-6 relative max-h-[92vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200"
+          className="w-full max-w-4xl rounded-2xl border border-[#e6e4dc] bg-[#ffffff] p-5 sm:p-10 shadow-2xl space-y-6 relative max-h-[92vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute right-6 top-6 p-2 rounded-full border border-[#e6e4dc] text-[#666666] hover:text-[#111111] hover:border-[#111111] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]"
+            className="absolute right-4 top-4 sm:right-6 sm:top-6 z-10 p-2 rounded-full border border-[#e6e4dc] bg-[#ffffff]/80 backdrop-blur-md text-[#666666] hover:text-[#111111] hover:border-[#111111] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]"
             aria-label="Close project details"
           >
             <X className="h-4 w-4" />
